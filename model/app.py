@@ -41,7 +41,7 @@ async def predict(file: UploadFile = File(...)):
     if not file:
         return JSONResponse(content={'error': 'No file part'}, status_code=400)
 
-    file_path = os.path.join("../dataset/test/images", file.filename)
+    file_path = os.path.join("../dataset/test/demo", file.filename)
 
     img = imread(file_path)[:,:,:IMG_CHANNELS]
     img = resize(img, (IMG_HEIGHT, IMG_WIDTH), mode='constant', preserve_range=True)
@@ -52,7 +52,7 @@ async def predict(file: UploadFile = File(...)):
 
     preds_test = model.predict(img_array, verbose=1)
 
-    preds_test_t = (preds_test > 0.1).astype(np.uint8)
+    preds_test_t = (preds_test > 0.3).astype(np.uint8)
 
     predicted_mask = preds_test_t[0]
 
@@ -73,16 +73,16 @@ async def predict(file: UploadFile = File(...)):
 
     ratio = true_count/(mask.size)
 
-    if ratio == 0:
-        category = 4
-    elif ratio < 0.01:
-        category = 3
-    elif ratio < 0.03:
-        category = 2
-    else:
+    if ratio > 0.15:
         category = 1
+    elif ratio > 0.08:
+        category = 2
+    elif ratio > 0.05:
+        category = 3
+    else:
+        category = 4
 
-    return {"category": category, "img": img_base64}
+    return {"ratio": ratio, "category": category, "img": img_base64}
 
 
 

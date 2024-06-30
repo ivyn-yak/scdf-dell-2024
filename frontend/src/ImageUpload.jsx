@@ -43,7 +43,7 @@ const ImageUpload = () => {
         console.log("File uploaded successfully");
         setImageBase64(result.img);
         setCategory(result.category);
-        console.log(result.category);
+        console.log(result.category, result.ratio);
       } else {
         console.error("Upload failed:", result.error);
       }
