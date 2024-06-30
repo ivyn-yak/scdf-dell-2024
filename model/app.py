@@ -1,12 +1,10 @@
-from skimage.io import imread, imshow
+from skimage.io import imread
 from skimage.transform import resize
 import os
 import numpy as np
-import tensorflow as tf
 from fastapi import FastAPI, File, UploadFile
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
-from werkzeug.utils import secure_filename
 from tensorflow import keras
 import io
 from PIL import Image
@@ -34,7 +32,7 @@ def custom_lambda(x):
 
 custom_objects = {'custom_lambda': custom_lambda}
 
-model = keras.models.load_model("../fire_segmentation.keras", custom_objects=custom_objects)
+model = keras.models.load_model("./fire_segmentation.keras", custom_objects=custom_objects)
 
 @app.post("/")
 async def predict(file: UploadFile = File(...)):
