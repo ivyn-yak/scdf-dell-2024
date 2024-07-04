@@ -1,4 +1,4 @@
-dataset/
+train/
 logs/
 node_modules/
 .env
