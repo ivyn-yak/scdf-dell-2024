@@ -34,7 +34,7 @@ const ImageUpload = () => {
     formData.append("file", selectedImage);
 
     try {
-      const response = await fetch("http://0.0.0.0:8080/", {
+      const response = await fetch("https://tensorflow-teck-xuan.apps.innovate.sg-cna.com/", {
         method: "POST",
         body: formData,
       });

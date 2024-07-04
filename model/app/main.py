@@ -22,11 +22,15 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["https://frontend-teck-xuan.apps.innovate.sg-cna.com"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+@app.get("/")
+def read_root():
+    return {"message": "Hello World"}
 
 def custom_lambda(x):
     return x / 255
@@ -109,7 +113,8 @@ async def predict(file: UploadFile = File(...)):
         return JSONResponse(content={'error': 'No file part'}, status_code=400)
 
     ### change path if running locally
-    dataset_path = "/app/dataset/test/demo"
+
+    dataset_path = "/app/images"
 
     if not os.path.exists(dataset_path):
         print(f"The path {dataset_path} does not exist.")
@@ -165,9 +170,3 @@ async def predict(file: UploadFile = File(...)):
         category = 5
 
     return {"ratio": ratio, "category": category, "img": img_base64}
-
-
-
-if __name__ == '__main__':
-    import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8080)

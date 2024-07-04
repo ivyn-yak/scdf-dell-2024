@@ -1,4 +1,4 @@
-FROM bitnami/tensorflow-serving:2.15.1
+FROM --platform=linux/amd64 bitnami/tensorflow-serving:2.15.1
 
 WORKDIR /app
 
@@ -18,6 +18,8 @@ RUN /opt/venv/bin/pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
+EXPOSE 8080
+
 USER 1001
 
-CMD ["/opt/venv/bin/python", "app/main.py"]
+CMD ["/opt/venv/bin/uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080"]
