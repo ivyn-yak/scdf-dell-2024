@@ -5,3 +5,4 @@ numpy>=1.26.4
 scikit-image>=0.24.0
 tensorflow>=2.15.1
 python-dotenv
+pillow-avif-plugin

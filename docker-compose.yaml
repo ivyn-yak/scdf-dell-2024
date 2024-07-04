@@ -2,6 +2,7 @@ version: '3.8'
 
 services:
   tensorflow:
+    image: ihl-harbor.apps.innovate.sg-cna.com/teck-xuan/tensorflow:v1
     build:
       context: ./model
     volumes:
@@ -11,6 +12,7 @@ services:
     command: ["/opt/venv/bin/python", "app/main.py"]
 
   frontend:
+    image: ihl-harbor.apps.innovate.sg-cna.com/teck-xuan/frontend:v1
     build:
       context: ./frontend
     ports:

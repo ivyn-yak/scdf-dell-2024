@@ -9,6 +9,7 @@ import tensorflow as tf
 from tensorflow import keras
 import io
 from PIL import Image
+import pillow_avif
 import base64
 
 HOME = os.getcwd()
@@ -116,7 +117,7 @@ async def predict(file: UploadFile = File(...)):
         print(f"The path {dataset_path} exists.")
 
     file_path = os.path.join(dataset_path, file.filename)
-    
+
     if not os.path.exists(file_path):
         print(f"The file path {file_path} does not exist.")
     else:
