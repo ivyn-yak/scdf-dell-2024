@@ -1,3 +1,4 @@
 dataset/
 logs/
 node_modules/
+.env
