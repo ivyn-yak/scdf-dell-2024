@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  tensorflow:
+    build:
+      context: ./model
+    volumes:
+      - ./dataset/test/demo:/app/dataset/test/demo
+    ports:
+      - "8000:8000"
+    command: ["/opt/venv/bin/python", "app/main.py"]
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "5173:5173"
