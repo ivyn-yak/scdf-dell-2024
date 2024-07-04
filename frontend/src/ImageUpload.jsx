@@ -34,7 +34,7 @@ const ImageUpload = () => {
     formData.append("file", selectedImage);
 
     try {
-      const response = await fetch("http://0.0.0.0:8000/", {
+      const response = await fetch("http://0.0.0.0:8080/", {
         method: "POST",
         body: formData,
       });
